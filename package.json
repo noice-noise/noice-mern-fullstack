@@ -1,0 +1,19 @@
+{
+  "name": "noice-rest-react",
+  "version": "0.1.0",
+  "description": "MERN Stack REST API exploration project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "author": "noice-noise",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.4.0"
+  }
+}
