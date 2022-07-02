@@ -1,7 +1,7 @@
 {
-  "name": "noice-rest-react",
+  "name": "noice-mern-fullstack",
   "version": "0.1.0",
-  "description": "MERN Stack REST API exploration project",
+  "description": "MERN Stack exploration project",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
