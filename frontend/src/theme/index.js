@@ -13,23 +13,24 @@ const config = {
   useSystemColorMode: false,
 };
 
-const inputSelectStyles = {
-  variants: {
-    filled: {
-      field: {
-        borderRadius: 'none',
-        _focus: {
-          borderColor: 'brand.500',
-        },
-      },
-    },
+const brandRing = {
+  _focus: {
+    ring: 1,
+    ringColor: 'brand.500',
   },
 };
 
-const brandRing = {
-  _focus: {
-    ring: 2,
-    ringColor: 'brand.500',
+const inputSelectStyles = {
+  variants: {
+    outline: {
+      field: {
+        borderRadius: 'md',
+        _focus: {
+          borderColor: 'brand.500',
+          ...brandRing,
+        },
+      },
+    },
   },
 };
 
@@ -96,7 +97,7 @@ const theme = extendTheme(
     components: ['Button', 'Checkbox'],
   }),
   withDefaultVariant({
-    variant: 'filled',
+    variant: 'outline',
     components: ['Input', 'Select'],
   })
 );

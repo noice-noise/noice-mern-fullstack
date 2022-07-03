@@ -1,36 +1,25 @@
-import {
-  Icon,
-  Text,
-  HStack,
-  Flex,
-  Button,
-  ButtonGroup,
-} from '@chakra-ui/react';
-import {
-  FaSignInAlt,
-  FaSignOutAlt,
-  FaFacebook,
-  FaTwitter,
-  FaRegUser,
-} from 'react-icons/fa';
+import { Box, Heading } from '@chakra-ui/react';
+import { Spacer } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
+import { HStack, Button, ButtonGroup } from '@chakra-ui/react';
+import { FaSignInAlt, FaSignOutAlt, FaRegUser } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header>
-      <div>
-        <Link to="/">Goal Setter</Link>
-        <Button colorScheme="blue" variant="ghost" leftIcon={<FaSignInAlt />}>
-          test
-        </Button>
-      </div>
-      <HStack>
+    <Box>
+      <HStack p="4" px="10">
+        <Heading size="sm" as={Link} to="/">
+          GoalSetter
+        </Heading>
+        <Spacer />
         <ButtonGroup spacing="6">
           <Button
+            px="7"
             as={Link}
             to="/login"
-            colorScheme="brand"
+            variant="solid"
             leftIcon={<FaSignInAlt />}
           >
             Login
@@ -38,14 +27,15 @@ const Header = () => {
           <Button
             as={Link}
             to="/register"
-            colorScheme="brand"
+            variant="outline"
             leftIcon={<FaRegUser />}
           >
             Register
           </Button>
         </ButtonGroup>
       </HStack>
-    </header>
+      <Divider />
+    </Box>
   );
 };
 
