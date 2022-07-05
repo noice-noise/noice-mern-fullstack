@@ -17,10 +17,10 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    password2: '',
+    passwordConfirm: '',
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, passwordConfirm } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -80,8 +80,8 @@ const Register = () => {
             children={<Icon as={FaLock} color="gray.300" />}
           />
           <Input
-            id="password2"
-            name="password2"
+            id="passwordConfirm"
+            name="passwordConfirm"
             type="password"
             placeholder="Confirm Password"
           />
