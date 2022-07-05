@@ -9,8 +9,11 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { FaSignInAlt, FaEnvelope, FaLock } from 'react-icons/fa';
+import { reset, login } from '../features/auth/authSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -18,13 +21,43 @@ const Login = () => {
     password: '',
   });
 
-  const { name, email } = formData;
+  const { email, password } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log('oy error', message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
   };
 
   return (
@@ -37,7 +70,7 @@ const Login = () => {
         </Heading>
         <Heading size="md">Login to your account</Heading>
       </VStack>
-      <VStack as="form" w="full" spacing="4">
+      <VStack as="form" onSubmit={onSubmit} w="full" spacing="4">
         <InputGroup>
           <InputRightElement
             pointerEvents="none"
@@ -61,6 +94,7 @@ const Login = () => {
             name="password"
             type="password"
             placeholder="Password"
+            onChange={onChange}
           />
         </InputGroup>
         <Button type="submit" w="full">

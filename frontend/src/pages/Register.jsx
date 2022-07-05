@@ -9,8 +9,12 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { FaRegUser, FaEnvelope, FaLock } from 'react-icons/fa';
+
+import { register, reset } from '../features/auth/authSlice';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,11 +26,51 @@ const Register = () => {
 
   const { name, email, password, passwordConfirm } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log('oy error', message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log('value', e.target.value);
+
+    console.log('pswds', password, passwordConfirm);
+
+    if (password !== passwordConfirm) {
+      console.log('error');
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+
+      console.log('Userdata', userData);
+
+      dispatch(register(userData));
+    }
   };
 
   return (
@@ -39,7 +83,7 @@ const Register = () => {
         </Heading>
         <Heading size="md">Create an account</Heading>
       </VStack>
-      <VStack as="form" w="full" spacing="4">
+      <VStack as="form" onSubmit={onSubmit} w="full" spacing="4">
         <InputGroup>
           <Input
             id="name"
@@ -72,6 +116,7 @@ const Register = () => {
             name="password"
             type="password"
             placeholder="Password"
+            onChange={onChange}
           />
         </InputGroup>
         <InputGroup>
@@ -84,6 +129,7 @@ const Register = () => {
             name="passwordConfirm"
             type="password"
             placeholder="Confirm Password"
+            onChange={onChange}
           />
         </InputGroup>
         <Button type="submit" w="full">
