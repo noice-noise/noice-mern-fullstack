@@ -30,7 +30,7 @@ const Header = () => {
           {user ? (
             <Button
               onClick={onLogout}
-              variant="solid"
+              variant="ghost"
               leftIcon={<FaSignInAlt />}
             >
               Logout

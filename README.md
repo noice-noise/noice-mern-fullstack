@@ -5,11 +5,14 @@
 - REST API
 - Simple Route Protection & Authentication with Tokens
 - [Chakra UI](https://chakra-ui.com/)
+- [Redux](https://redux.js.org/)
 
 ## WIP
 
 - Frontend
-- [Redux](https://redux.js.org/)
+  - [ ] Toast
+  - [ ] Spinner
+- Deployment
 
 ## References
 
