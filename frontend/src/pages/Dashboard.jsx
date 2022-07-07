@@ -26,9 +26,10 @@ function Dashboard() {
 
     dispatch(getGoals());
 
-    return () => {
-      dispatch(reset());
-    };
+    // causes error
+    // return () => {
+    //   dispatch(reset());
+    // };
   }, [user, navigate, isError, message, dispatch]);
 
   return (
